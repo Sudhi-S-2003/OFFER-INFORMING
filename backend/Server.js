@@ -21,5 +21,6 @@ mongoose.connect('mongodb://localhost:27017/offer-app', {
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/offers', require('./routes/offers'));
 app.use('/api/polls', require('./routes/Polls'));
+app.use('/api/shops',require('./routes/shop'))
 // Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

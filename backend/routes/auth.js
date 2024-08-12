@@ -3,9 +3,10 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Shop =require('../models/Shop')
 // User Registration
 router.post('/register', async (req, res) => {
-    const { name, email, password, userType } = req.body;
+    const { name, email, password, userType, shopName,shopAddress, shopContact } = req.body;
     try {
         let user = await User.findOne({ email });
         if (user) {
@@ -22,6 +23,21 @@ router.post('/register', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
         await user.save();
+        // If user is a business, create a shop
+        if (userType === "business") {
+            if (!shopName || !shopAddress || !shopContact) {
+                return res.status(400).json({ msg: 'Please provide all shop details' });
+            }
+
+            const shop = new Shop({
+                name: shopName,
+                address:shopAddress,
+                contact:shopContact,
+                businessId: user.id
+            });
+
+            await shop.save();
+        }
         res.status(200).json({ msg: 'User successfully created' });
 
     } catch (err) {

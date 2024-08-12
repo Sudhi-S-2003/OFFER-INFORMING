@@ -9,18 +9,26 @@ function Register() {
         email: '',
         password: '',
         userType: userType || 'customer', 
+        shopName: '',
+        shopAddress: '',
+        shopContact: ''
     });
     
     const [alert, setAlert] = useState({ type: '', message: '' });
 
-    const { name, email, password, userType: stateUserType } = formData;
+    const { name, email, password, userType: stateUserType, shopName, shopAddress, shopContact } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+            const url = 'http://localhost:5000/api/auth/register';
+            const data = stateUserType === 'business'
+                ? { name, email, password, userType: stateUserType, shopName, shopAddress, shopContact }
+                : { name, email, password, userType: stateUserType };
+
+            const res = await axios.post(url, data);
             setAlert({ type: 'success', message: 'Registration successful!' });
             console.log(res.data);
         } catch (err) {
@@ -111,6 +119,55 @@ function Register() {
                         <option value="business">Business</option>
                     </select>
                 </div>
+                {stateUserType === 'business' && (
+                    <>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Shop Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter your shop name"
+                                name="shopName"
+                                value={shopName}
+                                onChange={onChange}
+                                required
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Shop Address</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter your shop address"
+                                name="shopAddress"
+                                value={shopAddress}
+                                onChange={onChange}
+                                required
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Shop Contact</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter your shop contact"
+                                name="shopContact"
+                                value={shopContact}
+                                onChange={onChange}
+                                required
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                    </>
+                )}
+
 
                 <button
                     type="submit"

@@ -5,6 +5,8 @@ import ViewOffer from './ViewOffers'
 import CreatePolls from './CreatePoll'
 import ViewPolls from './ViewPolls'
 import Dashboard from './Dashboard';
+import AddShop from './AddShop'; 
+import ViewShops from './ViewShops';
 const Business = () => {
   return (
     <>
@@ -14,7 +16,8 @@ const Business = () => {
       <Route path='/ViewOffers' element={<ViewOffer/>}/>
       <Route path='/CreatePoll' element={<CreatePolls/>}/>
       <Route path='/ViewPolls' element={<ViewPolls/>}/>
-      
+      <Route path='/AddShop' element={<AddShop />} /> 
+      <Route path='/ViewShops' element={<ViewShops />}/> 
     </Routes>
    
     </>

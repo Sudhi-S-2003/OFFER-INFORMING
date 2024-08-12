@@ -33,11 +33,11 @@ const ViewOffers = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {offers.length > 0 ? (
           offers.map((offer) => (
-            <div key={offer._id} className="bg-white rounded-lg shadow-md p-4">
+            <div key={offer._id} className="bg-white rounded-lg shadow-md p-4 max-w-[450px]">
               <img
                 src={offer.image}
                 alt={offer.title}
-                className="w-full h-40 object-cover rounded-t-lg mb-4"
+                className="w-full h-72  rounded-t-lg mb-4 object-contain"
               />
               <h2 className="text-xl font-semibold mb-2">{offer.title}</h2>
               <p className="text-gray-700 mb-2">{offer.description}</p>

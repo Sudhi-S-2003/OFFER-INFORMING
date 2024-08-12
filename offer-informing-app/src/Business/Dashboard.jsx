@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaPlus, FaEye, FaPoll, FaList } from 'react-icons/fa';
+import { FaPlus, FaEye, FaPoll, FaList ,FaStore } from 'react-icons/fa';
 function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -23,6 +23,15 @@ function Dashboard() {
           <FaList className="text-2xl" />
           <span className="text-lg font-medium">View My Polls</span>
         </Link>
+        <Link to="/Auth/Business/AddShop" className="btn btn-info flex items-center justify-center space-x-2 hover:bg-teal-600 transition-colors duration-300 ease-in-out">
+          <FaStore className="text-2xl" />
+          <span className="text-lg font-medium">Add New Shop</span>
+        </Link>
+        <Link to="/Auth/Business/ViewShops" className="btn btn-success flex items-center justify-center space-x-2 hover:bg-green-600 transition-colors duration-300 ease-in-out">
+          <FaEye className="text-2xl" />
+          <span className="text-lg font-medium">View My Shops</span>
+        </Link>
+
       </div>
     </div>
   )
