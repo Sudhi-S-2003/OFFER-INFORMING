@@ -8,7 +8,9 @@ dotenv.config();
 
 // Middleware 
 const auth = (req, res, next) => {
-    const token = req.headers['authorization'];
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
     if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
 
     jwt.verify(token, process.env.JWTSECRET, (err, decoded) => {
@@ -57,6 +59,19 @@ router.get('/nearby', auth, async (req, res) => {
             longitude: { $lte: longitude + radius / (111 * Math.cos(latitude * (Math.PI / 180))) }
         });
 
+        res.json(offers);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+// Get all offers posted by the authenticated business
+router.get('/myoffers', auth, async (req, res) => {
+    // Ensure the user is a business
+    if (req.user.userType !== 'business') return res.status(403).json({ msg: 'Access denied' });
+
+    try {
+        const offers = await Offer.find({ businessId: req.user.id });
         res.json(offers);
     } catch (err) {
         console.error(err.message);

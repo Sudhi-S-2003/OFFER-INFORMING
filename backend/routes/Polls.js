@@ -8,7 +8,8 @@ dotenv.config();
 
 // Middleware 
 const auth = (req, res, next) => {
-    const token = req.headers['authorization'];
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
     if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
 
     jwt.verify(token, process.env.JWTSECRET, (err, decoded) => {
@@ -70,12 +71,12 @@ router.post('/vote/:id', auth, async (req, res) => {
 });
 
 // Get Polls 
-router.get('/business/:id', auth, async (req, res) => {
+router.get('/business', auth, async (req, res) => {
     // Businesses only
     if (req.user.userType !== 'business') return res.status(403).json({ msg: 'Access denied' });
 
     try {
-        const polls = await Poll.find({ businessId: req.params.id });
+        const polls = await Poll.find({ businessId: req.user.id });
         res.json(polls);
     } catch (err) {
         console.error(err.message);

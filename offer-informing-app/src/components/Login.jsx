@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function Login({ setToken, setUserType }) {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -26,9 +26,11 @@ function Login() {
             // Store token and userType in local storage
             localStorage.setItem('token', token);
             localStorage.setItem('userType', userType);
+            setToken(token);
+            setUserType(userType);
 
-            // Redirect to a protected route
-            navigate('/dashboard');
+            // Redirect to Business ROUTE
+            navigate('/Auth/Business');
         } catch (err) {
             setAlert({ type: 'error', message: err.response?.data?.message || 'Login failed.' });
             console.error(err.response?.data);

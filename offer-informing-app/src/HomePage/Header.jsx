@@ -16,9 +16,6 @@ function Header({ token, userType, onLogout }) {
                 </h1>
                 <nav>
                     <ul className="flex space-x-4">
-                        <li>
-                            <Link to="/offers" className="hover:text-gray-300">Offers</Link>
-                        </li>
                         {token ? (
                             <>
                                 {userType === 'business' && (
@@ -83,9 +80,6 @@ function Header({ token, userType, onLogout }) {
                                 </li>
                             </>
                         )}
-                        <li>
-                            <Link to="/polls" className="hover:text-gray-300">Polls</Link>
-                        </li>
                     </ul>
                 </nav>
             </div>
