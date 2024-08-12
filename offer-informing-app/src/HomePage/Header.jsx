@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ token, userType, onLogout }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => setIsOpen(!isOpen);
@@ -19,15 +19,43 @@ function Header() {
                         <li>
                             <Link to="/offers" className="hover:text-gray-300">Offers</Link>
                         </li>
-                        <li className="relative">
+                        {token ? (
+                            <>
+                                {userType === 'business' && (
+                                    <li>
+                                        <Link to="/Auth/Business" className="hover:text-gray-300">Business</Link>
+                                    </li>
+                                )}
+                                {userType === 'customer' && (
+                                    <li>
+                                        <Link to="/Auth/Customers" className="hover:text-gray-300">Customers</Link>
+                                    </li>
+                                )}
+                                 <li>
+                                    <button
+                                        onClick={onLogout}
+                                        className="hover:text-gray-300 focus:outline-none"
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                               <li className="relative">
                             <button 
                                 onClick={toggleDropdown} 
                                 className="hover:text-gray-300 focus:outline-none"
+                                aria-expanded={isOpen}
+                                aria-controls="register-dropdown"
                             >
                                 Register
                             </button>
                             {isOpen && (
-                                <ul className="absolute right-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg">
+                                <ul 
+                                    id="register-dropdown" 
+                                    className="absolute right-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg"
+                                >
                                     <li>
                                         <Link 
                                             to="/register/customer" 
@@ -49,9 +77,12 @@ function Header() {
                                 </ul>
                             )}
                         </li>
-                        <li>
-                            <Link to="/login" className="hover:text-gray-300">Login</Link>
-                        </li>
+
+                                <li>
+                                    <Link to="/login" className="hover:text-gray-300">Login</Link>
+                                </li>
+                            </>
+                        )}
                         <li>
                             <Link to="/polls" className="hover:text-gray-300">Polls</Link>
                         </li>
