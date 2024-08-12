@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost:27017/offer-app', {
 }).then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-
+// Routes
+app.use('/api/auth', require('./routes/auth'));
 // Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
