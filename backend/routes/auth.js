@@ -3,8 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const dotenv =require('dotenv')
-dotenv.config()
 // User Registration
 router.post('/register', async (req, res) => {
     const { name, email, password, userType } = req.body;
@@ -24,7 +22,7 @@ router.post('/register', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
         await user.save();
-        res.status(200).json({ msg: 'User Successfully create' })
+        res.status(200).json({ msg: 'User successfully created' });
 
     } catch (err) {
         console.error(err.message);
@@ -53,9 +51,9 @@ router.post('/login', async (req, res) => {
             },
         };
 
-        jwt.sign(payload, process.env.JWTSECERT, { expiresIn: '10h' }, (err, token) => {
+        jwt.sign(payload, process.env.JWTSECRET, { expiresIn: '10h' }, (err, token) => {
             if (err) throw err;
-            res.json({ token });
+            res.json({ token, userType: user.userType });
         });
     } catch (err) {
         console.error(err.message);
