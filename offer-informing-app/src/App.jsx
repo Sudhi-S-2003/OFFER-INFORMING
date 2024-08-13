@@ -30,7 +30,7 @@ function App() {
       
       <Header token={token} userType={userType} onLogout={handleLogout} />
       <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Homepage token={token} userType={userType}/>} />
           {token ? (
             <>
               {userType === 'business' && (

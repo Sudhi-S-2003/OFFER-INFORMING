@@ -1,10 +1,10 @@
 import HeroSection from "./Hero";
 import MainContent from "./MainContent";
-function Homepage() {
+function Homepage ({ token, userType}) {
   return (
     <>
       
-      <HeroSection />
+      <HeroSection token={token} userType={userType}/>
       <MainContent />
     </>
   );
