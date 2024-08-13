@@ -3,7 +3,7 @@ import Business from "./Business/Business";
 import Login from "./components/Login";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
-import Customers from "./Customers/Customers";
+import Customer from "./Customers/Customer";
 import Footer from "./HomePage/Footer";
 import Header from "./HomePage/Header";
 import Homepage from "./HomePage/Homepage";
@@ -37,7 +37,7 @@ function App() {
               <Route path="/Auth/Business/*" element={<Business />} />
             )}
             {userType === 'customer' && (
-              <Route path="/Auth/Customers" element={<Customers />} />
+              <Route path="/Auth/Customer/*" element={<Customer />} />
             )}
              
               

@@ -22,5 +22,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/offers', require('./routes/offers'));
 app.use('/api/polls', require('./routes/Polls'));
 app.use('/api/shops',require('./routes/shop'))
+app.use('/api/users',require('./routes/users'))
+
 // Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

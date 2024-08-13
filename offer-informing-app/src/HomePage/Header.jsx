@@ -25,7 +25,7 @@ function Header({ token, userType, onLogout }) {
                                 )}
                                 {userType === 'customer' && (
                                     <li>
-                                        <Link to="/Auth/Customers" className="hover:text-gray-300">Customers</Link>
+                                        <Link to="/Auth/Customer" className="hover:text-gray-300">Customers</Link>
                                     </li>
                                 )}
                                  <li>

@@ -6,6 +6,7 @@ const PostOffer = () => {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [validity, setValidity] = useState('');
+  const [type, setType] = useState('offer'); 
   const [location, setLocation] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
@@ -19,6 +20,7 @@ const PostOffer = () => {
         description,
         image,
         validity,
+        type,
         location,
         latitude,
         longitude
@@ -67,6 +69,20 @@ const PostOffer = () => {
           className="input input-bordered w-full"
           required
         />
+          <select
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+          className="select select-bordered w-full"
+          required
+        >
+<option value="all">All</option>
+          <option value="offer">Offers</option>
+          <option value="discount">Discounts</option>
+          <option value="special">Specials</option>
+          <option value="event">Events</option>
+          <option value="promotion">Promotions</option>
+         
+        </select>
         <input
           type="text"
           placeholder="Location"
