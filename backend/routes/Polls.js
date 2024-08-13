@@ -97,5 +97,24 @@ router.get('/user/votes', auth, async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+// Get all Polls
+router.get('/', auth, async (req, res) => {
+    // Customers only
+    if (req.user.userType !== 'customer') return res.status(403).json({ msg: 'Access denied' });
+
+    try {
+        // Fetch all polls that the customer has not voted on
+        const votedPollIds = await Poll.find({ 'votes.userId': req.user.id }).distinct('_id');
+        const polls = await Poll.find({ _id: { $nin: votedPollIds } });
+
+        res.json(polls);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+
+
 
 module.exports = router;
