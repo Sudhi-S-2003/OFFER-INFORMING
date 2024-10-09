@@ -23,9 +23,9 @@ View insights and reports.
 Register as a business.
 ### Geolocation-based Services:
 
-##Installation and Setup
+## Installation and Setup
 To install and set up the Offer Informing App, follow these steps:
-####Prerequisites
+#### Prerequisites
 Ensure you have the following installed:
 
 Node.js
@@ -41,7 +41,7 @@ cd OFFER-INFORMING/backend
 ### Install Dependencies
 
 ```bash
-npm 
+npm i
 ```
 ## Create a .env File
 
